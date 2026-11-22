@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Circle - Home</title>
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f5fb;
+            color: #26364a;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 15px 8%;
+        }
+
+        .logo {
+            color: #365fc0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-buttons a {
+            padding: 10px 14px;
+            color: #365fc0;
+            background-color: #e8efff;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #d7e2ff;
+        }
+
+        .main-content {
+            max-width: 850px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .welcome-box {
+            padding: 35px;
+            background-color: white;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .welcome-box h1 {
+            color: #365fc0;
+        }
+
+        .subject-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .subject {
+            padding: 14px 20px;
+            background-color: white;
+            border: 1px solid #dce3ed;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+        .time-log {
+            margin-top: 25px;
+            padding: 24px;
+            background-color: white;
+            border: 1px solid #dce3ed;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000010;
+        }
+
+        .time-log h2 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #365fc0;
+        }
+
+        .time-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin: 18px 0;
+            padding: 15px;
+            background-color: #eaf0ff;
+            border-radius: 9px;
+        }
+
+        .time-total {
+            color: #365fc0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .table-box {
+            overflow-x: auto;
+            border: 1px solid #e3e8ef;
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #e3e8ef;
+        }
+
+        th {
+            background-color: #f5f7fb;
+            color: #53637a;
+            font-size: 13px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: #f8faff;
+        }
+
+        .subject-tag {
+            display: inline-block;
+            padding: 5px 9px;
+            color: #365fc0;
+            background-color: #eaf0ff;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .time-value {
+            font-weight: bold;
+            color: #2c825f;
+        }
+
+        /* Stack the menu buttons on small screens */
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">Study Circle</div>
+
+        <div class="nav-buttons">
+            <a href="home.html">Home</a>
+            <a href="#subjects">Subjects</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+            <a href="registration.html">Register</a>
+        </div>
+    </div>
+        <div class="welcome-box" id="about">
+            <h1>Welcome to Study Circle!</h1>
+            <p>A simple place for students to learn and study together.</p>
+            <p>Choose a subject and get started with your classmates.</p>
+    <div class="main-content">
+
+            </div>
+        </div>
+     <div class="time-log">
+            <h2>My Time Spent Log</h2>
+            <p>See how much time you have spent studying.</p>
+
+            <div class="time-summary">
+                <div>
+                    <strong>Total study time</strong><br>
+                    <span class="note">Across the sessions below</span>
+                </div>
+                <div class="time-total">2 hr 15 min</div>
+            </div>
+
+            <div class="table-box">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Subject</th>
+                            <th>Time Spent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Today</td>
+                            <td><span class="subject-tag">MEC136</span></td>
+                            <td class="time-value">45 minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Today</td>
+                            <td><span class="subject-tag">CSE326</span></td>
+                            <td class="time-value">30 minutes</td>
+                        </tr>
+                        <tr>
+                            <td>Yesterday</td>
+                            <td><span class="subject-tag">MTH165</span></td>
+                            <td class="time-value">1 hour</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+</body>
+</html>
