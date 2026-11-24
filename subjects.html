@@ -1,0 +1,136 @@
+html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subjects - Study Circle</title>
+    <style>
+        /* Basic styles for the subjects page */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f5fb;
+            color: #26364a;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 15px 8%;
+        }
+
+        .logo {
+            color: #365fc0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-buttons a {
+            padding: 10px 14px;
+            color: #365fc0;
+            background-color: #e8efff;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #d7e2ff;
+        }
+
+        .content {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #365fc0;
+        }
+
+        .subject-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .subject-card {
+            flex: 1 1 220px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #dce3ed;
+            border-radius: 10px;
+        }
+
+        .subject-card h2 {
+            color: #365fc0;
+        }
+
+        .note {
+            color: #687589;
+        }
+
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation menu -->
+    <div class="navbar">
+        <div class="logo">Study Circle</div>
+        <div class="nav-buttons">
+            <a href="home.html">Home</a>
+            <a href="subjects.html">Subjects</a>
+            <a href="about.html">About</a>
+            <a href="profile.html">Profile</a>
+            <a href="login.html">Login</a>
+            <a href="registration.html">Register</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>Our Subjects</h1>
+        <p class="note">Choose a subject to see what our study circle is learning.</p>
+
+        <div class="subject-list">
+            <div class="subject-card">
+                <h2>MEC136</h2>
+                <p>Engineering Mechanics</p>
+                <p class="note">Study forces, motion, and mechanical systems.</p>
+            </div>
+
+            <div class="subject-card">
+                <h2>MTH165</h2>
+                <p>Engineering Mathematics</p>
+                <p class="note">Practice equations, calculus, and problem solving.</p>
+            </div>
+
+            <div class="subject-card">
+                <h2>CSE326</h2>
+                <p>Internet Programming</p>
+                <p class="note">Learn how websites are built and styled.</p>
+            </div>
+
+            <div class="subject-card">
+                <h2>INT108</h2>
+                <p>Python Programming</p>
+                <p class="note">Write simple programs and learn Python basics.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
