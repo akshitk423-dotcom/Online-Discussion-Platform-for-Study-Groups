@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Study Circle - Home</title>
     <style>
-
+        /* Main page colors and font */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #f1f5fb;
             color: #26364a;
         }
+
+        /* Flexbox puts the logo and menu on one line */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -26,6 +28,7 @@
             font-weight: bold;
         }
 
+        /* These links look like navigation buttons */
         .nav-buttons {
             display: flex;
             gap: 10px;
@@ -75,17 +78,6 @@
             border-radius: 8px;
         }
 
-        @media (max-width: 600px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .nav-buttons {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-        }
         .time-log {
             margin-top: 25px;
             padding: 24px;
@@ -164,6 +156,26 @@
             color: #2c825f;
         }
 
+        .profile-box {
+            margin-top: 25px;
+            padding: 24px;
+            background-color: white;
+            border: 1px solid #dce3ed;
+            border-radius: 12px;
+        }
+
+        .profile-box h2 {
+            margin-top: 0;
+            color: #365fc0;
+        }
+
+        .profile-detail {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f5f7fb;
+            border-radius: 6px;
+        }
+
         /* Stack the menu buttons on small screens */
         @media (max-width: 600px) {
             .navbar {
@@ -176,31 +188,41 @@
                 justify-content: center;
             }
         }
-        
     </style>
 </head>
 <body>
+    <!-- The navigation menu -->
     <div class="navbar">
         <div class="logo">Study Circle</div>
 
         <div class="nav-buttons">
             <a href="home.html">Home</a>
             <a href="subjects.html">Subjects</a>
+            <a href="#subjects">Subjects</a>
+            <a href="profile.html">Profile</a>
             <a href="about.html">About</a>
             <a href="login.html">Login</a>
             <a href="registration.html">Register</a>
-            <a href="profile.html">Profile</a>
         </div>
     </div>
+
+    <!-- Main welcome section -->
+    <div class="main-content">
         <div class="welcome-box" id="about">
             <h1>Welcome to Study Circle!</h1>
             <p>A simple place for students to learn and study together.</p>
             <p>Choose a subject and get started with your classmates.</p>
-    <div class="main-content">
 
+            <div class="subject-list" id="subjects">
+                <div class="subject">MEC136</div>
+                <div class="subject">MTH165</div>
+                <div class="subject">CSE326</div>
+                <div class="subject">INT108</div>
             </div>
         </div>
-     <div class="time-log">
+
+        <!-- Example study times. Edit these rows when you want. -->
+        <div class="time-log">
             <h2>My Time Spent Log</h2>
             <p>See how much time you have spent studying.</p>
 
@@ -240,5 +262,32 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+
+        <!-- Edit the profile details below with your own information. -->
+        <div class="profile-box" id="profile">
+            <h2>My Profile</h2>
+            <p class="note">This is your student profile. You can change these details in the HTML.</p>
+            <div class="profile-detail"><strong>Name:</strong> Your Name</div>
+            <div class="profile-detail"><strong>Email:</strong> your.email@example.com</div>
+            <div class="profile-detail"><strong>Subjects:</strong> MEC136, MTH165, CSE326, INT108</div>
+        </div>
+    </div>
+<script>
+    // Show any subjects added on the Subjects page.
+    var savedSubjects = JSON.parse(localStorage.getItem("mySubjects")) || [];
+    var i;
+
+    for (i = 0; i < savedSubjects.length; i++) {
+        var subjectCard = document.createElement("div");
+        subjectCard.className = "subject";
+        subjectCard.textContent = savedSubjects[i].code + " - " + savedSubjects[i].name;
+        document.getElementById("subjects").appendChild(subjectCard);
+    }
+</script>
+<script>
+    // Show a simple notification when this page opens.
+    alert("Welcome to the Study Circle home page!");
+</script>
 </body>
 </html>

@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Profile</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f1f5fb;
-        color: #26364a;
-    }
-
-    .profile-card {
-        max-width: 500px;
-        margin: 50px auto;
-        padding: 25px;
-        background-color: white;
-        border-radius: 10px;
-    }
-
-    h1 {
-        color: #365fc0;
-    }
-
-    .profile-detail {
-        margin: 10px 0;
-        padding: 12px;
-        background-color: #f5f7fb;
-        border-radius: 6px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile - Study Circle</title>
+<style>
+body { margin:0; font-family:Arial,sans-serif; background:#f1f5fb; color:#26364a; }
+.navbar { display:flex; justify-content:space-between; align-items:center; background:white; padding:15px 8%; }
+.logo { color:#365fc0; font-size:22px; font-weight:bold; }
+.nav-buttons { display:flex; gap:10px; }
+.nav-buttons a { padding:10px 14px; color:#365fc0; background:#e8efff; border-radius:6px; text-decoration:none; }
+.nav-buttons a:hover { background:#d7e2ff; }
+.content { max-width:750px; margin:50px auto; padding:30px; background:white; border-radius:12px; }
+h1 { color:#365fc0; }
+.profile-detail { margin:10px 0; padding:12px; background:#f5f7fb; border-radius:6px; }
+@media(max-width:600px) { .navbar { flex-direction:column; gap:15px; } .nav-buttons { flex-wrap:wrap; justify-content:center; } }
 </style>
 </head>
 <body>
+<div class="navbar">
+    <div class="logo">Study Circle</div>
+    <div class="nav-buttons">
+        <a href="home.html">Home</a>
+            <a href="subjects.html">Subjects</a>
+        <a href="about.html">About</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html">Login</a>
+        <a href="registration.html">Register</a>
+    </div>
+</div>
+<div class="content">
     <h1>My Profile</h1>
+    <p>Change the example details below to your own information.</p>
+    <div class="profile-detail"><strong>Name:</strong> <span id="profileName">Your Name</span></div>
+    <div class="profile-detail"><strong>Email:</strong> your.email@example.com</div>
+    <div class="profile-detail"><strong>Subjects:</strong> MEC136, MTH165, CSE326, INT108</div>
+</div>
+<script>
+    // Read the name sent from the registration page.
+    var pageInfo = new URLSearchParams(window.location.search);
+    var studentName = pageInfo.get("username");
 
-    <p><strong>Name:</strong> Your Name</p>
-    <p><strong>Email:</strong> your.email@example.com</p>
-    <p><strong>Subjects:</strong> MEC136, MTH165, CSE326, INT108</p>
-
-    <a href="home.html">Back to Home</a>
+    if (studentName != null && studentName != "") {
+        document.getElementById("profileName").textContent = studentName;
+    }
+</script>
+<script>
+    // Show a simple notification when this page opens.
+    alert("You are viewing your profile.");
+</script>
 </body>
 </html>

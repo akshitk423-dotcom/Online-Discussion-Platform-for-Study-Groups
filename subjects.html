@@ -1,4 +1,5 @@
-html>
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -71,8 +72,91 @@ html>
             color: #365fc0;
         }
 
+        .add-subject {
+            margin-bottom: 22px;
+            padding: 18px;
+            background-color: white;
+            border: 1px solid #dce3ed;
+            border-radius: 10px;
+        }
+
+        .add-subject input {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #cbd4df;
+            border-radius: 6px;
+        }
+
+        .add-subject input,
+        .add-subject textarea {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+            margin: 6px 0 12px;
+            border: 1px solid #cbd4df;
+            border-radius: 6px;
+            font-family: Arial, sans-serif;
+        }
+
+        .add-subject textarea {
+            min-height: 70px;
+        }
+
+        .add-subject button {
+            padding: 10px 14px;
+            color: white;
+            background-color: #4776e6;
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
         .note {
             color: #687589;
+        }
+
+        .enrollment {
+            margin-top: 12px;
+        }
+
+        .enrollment button {
+            padding: 8px 12px;
+            color: white;
+            background-color: #4776e6;
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .enrollment-status {
+            margin-left: 8px;
+            color: #2c825f;
+            font-size: 14px;
+        }
+
+        .comment-area {
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px solid #e3e8ef;
+        }
+
+        .comment-area input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 9px;
+            margin: 6px 0;
+            border: 1px solid #cbd4df;
+            border-radius: 6px;
+        }
+
+        .comment-area button {
+            padding: 8px 12px;
+            color: white;
+            background-color: #4776e6;
+            border: 0;
+            border-radius: 6px;
+            cursor: pointer;
         }
 
         @media (max-width: 600px) {
@@ -106,7 +190,22 @@ html>
         <h1>Our Subjects</h1>
         <p class="note">Choose a subject to see what our study circle is learning.</p>
 
-        <div class="subject-list">
+        <div class="add-subject">
+            <h2>Add a Subject</h2>
+            <label for="subjectCode">Subject code:</label>
+            <input id="subjectCode" type="text" placeholder="Example: BIO101">
+
+            <label for="subjectName">Subject name:</label>
+            <input id="subjectName" type="text" placeholder="Example: Biology">
+
+            <label for="subjectComment">Comment or description:</label>
+            <textarea id="subjectComment" placeholder="Write a comment about this subject"></textarea>
+
+            <button type="button" onclick="addSubject()">Add Subject</button>
+            <p class="note">Your new subjects stay on this device after you refresh the page.</p>
+        </div>
+
+        <div class="subject-list" id="subjectList">
             <div class="subject-card">
                 <h2>MEC136</h2>
                 <p>Engineering Mechanics</p>
@@ -132,5 +231,218 @@ html>
             </div>
         </div>
     </div>
+    <script>
+        // Make one subject card and add it to the page.
+        function showSubject(code, name, comment) {
+            var card = document.createElement("div");
+            card.className = "subject-card";
+
+            var heading = document.createElement("h2");
+            heading.textContent = code;
+
+            var subjectName = document.createElement("p");
+            subjectName.textContent = name;
+
+            var description = document.createElement("p");
+            description.className = "note";
+            description.textContent = comment || "A subject in our study circle.";
+
+            card.appendChild(heading);
+            card.appendChild(subjectName);
+            card.appendChild(description);
+            addEnrollmentButton(card, code);
+            addCommentBox(card, code);
+            document.getElementById("subjectList").appendChild(card);
+            showComments(code);
+        }
+
+        // Add a Join or Leave button to a subject card.
+        function addEnrollmentButton(card, code) {
+            var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
+            var area = document.createElement("div");
+            area.className = "enrollment";
+
+            var button = document.createElement("button");
+            button.type = "button";
+            button.id = "joinButton_" + safeCode;
+            button.textContent = "Join Subject";
+            button.onclick = function() { changeEnrollment(code); };
+
+            var status = document.createElement("span");
+            status.className = "enrollment-status";
+            status.id = "joinStatus_" + safeCode;
+
+            area.appendChild(button);
+            area.appendChild(status);
+            card.appendChild(area);
+            updateEnrollmentStatus(code);
+        }
+
+        // Join a subject or leave it if already joined.
+        function changeEnrollment(code) {
+            var joinedSubjects = JSON.parse(localStorage.getItem("joinedSubjects")) || [];
+            var position = joinedSubjects.indexOf(code);
+
+            if (position == -1) {
+                joinedSubjects.push(code);
+            } else {
+                joinedSubjects.splice(position, 1);
+            }
+
+            localStorage.setItem("joinedSubjects", JSON.stringify(joinedSubjects));
+            updateEnrollmentStatus(code);
+            alert("Your subject enrollment has been updated.");
+        }
+
+        // Show whether the student has joined this subject.
+        function updateEnrollmentStatus(code) {
+            var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
+            var joinedSubjects = JSON.parse(localStorage.getItem("joinedSubjects")) || [];
+            var button = document.getElementById("joinButton_" + safeCode);
+            var status = document.getElementById("joinStatus_" + safeCode);
+
+            if (button == null || status == null) { return; }
+
+            if (joinedSubjects.indexOf(code) == -1) {
+                button.textContent = "Join Subject";
+                status.textContent = "Not joined";
+                status.style.color = "#687589";
+            } else {
+                button.textContent = "Leave Subject";
+                status.textContent = "Joined ✓";
+                status.style.color = "#2c825f";
+            }
+        }
+
+        // Add a comment box to one subject card.
+        function addCommentBox(card, code) {
+            var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
+            var area = document.createElement("div");
+            area.className = "comment-area";
+
+            var label = document.createElement("b");
+            label.textContent = "Comments";
+
+            var input = document.createElement("input");
+            input.type = "text";
+            input.id = "commentInput_" + safeCode;
+            input.placeholder = "Write a comment";
+
+            var button = document.createElement("button");
+            button.type = "button";
+            button.textContent = "Add Comment";
+            button.onclick = function() { addComment(code); };
+
+            var list = document.createElement("div");
+            list.id = "commentList_" + safeCode;
+            list.className = "note";
+
+            area.appendChild(label);
+            area.appendChild(input);
+            area.appendChild(button);
+            area.appendChild(list);
+            card.appendChild(area);
+        }
+
+        // Save a comment for the selected subject.
+        function addComment(code) {
+            var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
+            var input = document.getElementById("commentInput_" + safeCode);
+            var comment = input.value.trim();
+
+            if (comment == "") {
+                alert("Please write a comment first.");
+                return;
+            }
+
+            var allComments = JSON.parse(localStorage.getItem("subjectComments")) || {};
+            if (allComments[code] == null) { allComments[code] = []; }
+            allComments[code].push(comment);
+            localStorage.setItem("subjectComments", JSON.stringify(allComments));
+            input.value = "";
+            showComments(code);
+            alert("Your comment was added.");
+        }
+
+        // Display saved comments under a subject.
+        function showComments(code) {
+            var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
+            var allComments = JSON.parse(localStorage.getItem("subjectComments")) || {};
+            var comments = allComments[code] || [];
+            var list = document.getElementById("commentList_" + safeCode);
+            var i;
+
+            if (list == null) { return; }
+            list.innerHTML = "";
+            for (i = 0; i < comments.length; i++) {
+                var commentLine = document.createElement("p");
+                commentLine.textContent = "• " + comments[i];
+                list.appendChild(commentLine);
+            }
+        }
+
+        // Add comment boxes to the four subjects already on the page.
+        function addCommentBoxesToCurrentSubjects() {
+            var cards = document.getElementsByClassName("subject-card");
+            var i;
+            for (i = 0; i < cards.length; i++) {
+                var code = cards[i].getElementsByTagName("h2")[0].textContent;
+                addEnrollmentButton(cards[i], code);
+                addCommentBox(cards[i], code);
+                showComments(code);
+            }
+        }
+
+        // Load subjects saved earlier in this browser.
+        function loadSavedSubjects() {
+            var savedSubjects = JSON.parse(localStorage.getItem("mySubjects")) || [];
+            var i;
+
+            for (i = 0; i < savedSubjects.length; i++) {
+                showSubject(savedSubjects[i].code, savedSubjects[i].name, savedSubjects[i].comment);
+            }
+        }
+
+        // Save a new subject and show it on the page.
+        function addSubject() {
+            var codeInput = document.getElementById("subjectCode");
+            var nameInput = document.getElementById("subjectName");
+            var code = codeInput.value.trim();
+            var name = nameInput.value.trim();
+            var comment = document.getElementById("subjectComment").value.trim();
+
+            if (code == "" || name == "") {
+                alert("Please enter both a subject code and a subject name.");
+                return;
+            }
+
+            var savedSubjects = JSON.parse(localStorage.getItem("mySubjects")) || [];
+            var i;
+
+            for (i = 0; i < savedSubjects.length; i++) {
+                if (savedSubjects[i].code.toLowerCase() == code.toLowerCase()) {
+                    alert("That subject code has already been added.");
+                    return;
+                }
+            }
+
+            var newSubject = { code: code, name: name, comment: comment };
+            savedSubjects.push(newSubject);
+            localStorage.setItem("mySubjects", JSON.stringify(savedSubjects));
+
+            showSubject(code, name, comment);
+            codeInput.value = "";
+            nameInput.value = "";
+            document.getElementById("subjectComment").value = "";
+            alert("The new subject was added.");
+        }
+
+        addCommentBoxesToCurrentSubjects();
+        loadSavedSubjects();
+    </script>
+<script>
+    // Show a simple notification when this page opens.
+    alert("Welcome to the Subjects page!");
+</script>
 </body>
 </html>

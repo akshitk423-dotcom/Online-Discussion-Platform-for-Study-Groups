@@ -1,13 +1,19 @@
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
 <style>
+/* Basic styles for both pages */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f1f5fb;
     color: #26364a;
 }
+
+/* Flexbox keeps the card in the middle of the page */
 .page {
     min-height: 100vh;
     display: flex;
@@ -72,7 +78,7 @@ a {
             <h2>Create an account</h2>
             <p class="note">Join your classmates and study together.</p>
 
-            <form>
+            <form onsubmit="return sendName()">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Your name" required>
 
@@ -82,11 +88,23 @@ a {
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Choose a password" required>
 
-                <button onclick="alert('Account created successfully!')" type="submit">Register</button>
+                <button type="submit">Register</button>
             </form>
 
             <p>Already have an account? <a href="login.html">Login</a></p>
         </div>
     </div>
+<script>
+    // Send the name to the profile page in the page address.
+    function sendName() {
+        var studentName = document.getElementById("name").value;
+        window.location.href = "profile.html?username=" + encodeURIComponent(studentName);
+        return false;
+    }
+</script>
+<script>
+    // Show a simple notification when this page opens.
+    alert("Enter your details to register.");
+</script>
 </body>
 </html>

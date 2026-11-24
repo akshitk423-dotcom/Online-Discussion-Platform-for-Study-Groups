@@ -1,9 +1,11 @@
+<!DOCTYPE html>
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 <style>
-
+/* Basic styles for both pages */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -11,6 +13,7 @@ body {
     color: #26364a;
 }
 
+/* Flexbox keeps the card in the middle of the page */
 .page {
     min-height: 100vh;
     display: flex;
@@ -82,13 +85,15 @@ a {
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Your password" required>
 
-                <button type="button" onclick="window.location.href='home.html'">
-  Login
-</button>
+                <a class="login-button" href="home.html">Login</a>
             </form>
 
             <p>New student? <a href="registration.html">Create an account</a></p>
         </div>
     </div>
+<script>
+    // Show a simple notification when this page opens.
+    alert("Enter the demo login details to continue.");
+</script>
 </body>
 </html>
