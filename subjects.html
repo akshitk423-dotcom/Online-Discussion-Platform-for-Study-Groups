@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subjects - Study Circle</title>
     <style>
-        /* Basic styles for the subjects page */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -173,7 +172,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation menu -->
+    
     <div class="navbar">
         <div class="logo">Study Circle</div>
         <div class="nav-buttons">
@@ -232,7 +231,7 @@
         </div>
     </div>
     <script>
-        // Make one subject card and add it to the page.
+        
         function showSubject(code, name, comment) {
             var card = document.createElement("div");
             card.className = "subject-card";
@@ -256,7 +255,6 @@
             showComments(code);
         }
 
-        // Add a Join or Leave button to a subject card.
         function addEnrollmentButton(card, code) {
             var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
             var area = document.createElement("div");
@@ -277,8 +275,6 @@
             card.appendChild(area);
             updateEnrollmentStatus(code);
         }
-
-        // Join a subject or leave it if already joined.
         function changeEnrollment(code) {
             var joinedSubjects = JSON.parse(localStorage.getItem("joinedSubjects")) || [];
             var position = joinedSubjects.indexOf(code);
@@ -293,8 +289,6 @@
             updateEnrollmentStatus(code);
             alert("Your subject enrollment has been updated.");
         }
-
-        // Show whether the student has joined this subject.
         function updateEnrollmentStatus(code) {
             var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
             var joinedSubjects = JSON.parse(localStorage.getItem("joinedSubjects")) || [];
@@ -313,8 +307,6 @@
                 status.style.color = "#2c825f";
             }
         }
-
-        // Add a comment box to one subject card.
         function addCommentBox(card, code) {
             var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
             var area = document.createElement("div");
@@ -343,8 +335,6 @@
             area.appendChild(list);
             card.appendChild(area);
         }
-
-        // Save a comment for the selected subject.
         function addComment(code) {
             var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
             var input = document.getElementById("commentInput_" + safeCode);
@@ -364,7 +354,6 @@
             alert("Your comment was added.");
         }
 
-        // Display saved comments under a subject.
         function showComments(code) {
             var safeCode = code.replace(/[^a-zA-Z0-9]/g, "");
             var allComments = JSON.parse(localStorage.getItem("subjectComments")) || {};
@@ -380,8 +369,6 @@
                 list.appendChild(commentLine);
             }
         }
-
-        // Add comment boxes to the four subjects already on the page.
         function addCommentBoxesToCurrentSubjects() {
             var cards = document.getElementsByClassName("subject-card");
             var i;
@@ -393,7 +380,6 @@
             }
         }
 
-        // Load subjects saved earlier in this browser.
         function loadSavedSubjects() {
             var savedSubjects = JSON.parse(localStorage.getItem("mySubjects")) || [];
             var i;
@@ -403,7 +389,6 @@
             }
         }
 
-        // Save a new subject and show it on the page.
         function addSubject() {
             var codeInput = document.getElementById("subjectCode");
             var nameInput = document.getElementById("subjectName");
@@ -441,7 +426,6 @@
         loadSavedSubjects();
     </script>
 <script>
-    // Show a simple notification when this page opens.
     alert("Welcome to the Subjects page!");
 </script>
 </body>
