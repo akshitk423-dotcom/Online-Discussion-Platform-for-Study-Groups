@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
 <style>
-/* Basic styles for both pages */
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -13,7 +13,6 @@ body {
     color: #26364a;
 }
 
-/* Flexbox keeps the card in the middle of the page */
 .page {
     min-height: 100vh;
     display: flex;
@@ -95,7 +94,6 @@ a {
         </div>
     </div>
 <script>
-    // Send the name to the profile page in the page address.
     function sendName() {
         var studentName = document.getElementById("name").value;
         window.location.href = "profile.html?username=" + encodeURIComponent(studentName);
@@ -103,7 +101,6 @@ a {
     }
 </script>
 <script>
-    // Show a simple notification when this page opens.
     alert("Enter your details to register.");
 </script>
 </body>
